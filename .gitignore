@@ -5,3 +5,4 @@ my_model
 plate_read.py
 plate.jpg
 plate*
+augmentation.py

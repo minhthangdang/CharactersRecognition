@@ -8,14 +8,16 @@ from model import model
 DATASET_PATH = './English/Fnt/'
 MODEL_PATH = '.'
 BATCH_SIZE = 128
-EPOCHS = 10
+EPOCHS = 20
 TARGET_WIDTH = 128
 TARGET_HEIGHT = 128
 TARGET_DEPTH = 3
 
 # Set up the data generator to flow data from disk
 print("[INFO] Setting up Data Generator...")
-data_gen = ImageDataGenerator(validation_split=0.3, rescale=1./255)
+data_gen = ImageDataGenerator(rotation_range=10, width_shift_range=0.2,
+    height_shift_range=0.2, shear_range=30.0, zoom_range=0.3,
+    horizontal_flip=False, validation_split=0.3, rescale=1./255)
 
 train_generator = data_gen.flow_from_directory(
     DATASET_PATH, 
@@ -33,7 +35,7 @@ val_generator = data_gen.flow_from_directory(
 
 # Build model
 print("[INFO] Compiling model...")
-alexnet = model(train_generator.num_classes, (TARGET_WIDTH, TARGET_HEIGHT, TARGET_DEPTH))
+alexnet = model(train_generator.num_classess, (TARGET_WIDTH, TARGET_HEIGHT, TARGET_DEPTH))
 
 # Compile the model
 alexnet.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
@@ -53,4 +55,4 @@ H = alexnet.fit_generator(
 print("[INFO] Serializing network...")
 alexnet.save(MODEL_PATH + os.path.sep + "my_model")
 
-print("[INFO] DONE!")
+print("[INFO] Done!")

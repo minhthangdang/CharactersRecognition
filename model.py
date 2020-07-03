@@ -47,7 +47,7 @@ def model(num_classes, input_shape):
     # 2nd Fully Connected Layer
     model.add(Dense(4096))
     model.add(Activation('relu'))
-    # Add Dropout
+    # Add Dropout to prevent overfitting
     model.add(Dropout(0.5))
 
     # Output Layer
