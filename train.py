@@ -17,7 +17,7 @@ TARGET_DEPTH = 3
 print("[INFO] Setting up Data Generator...")
 data_gen = ImageDataGenerator(rotation_range=10, width_shift_range=0.2,
     height_shift_range=0.2, shear_range=30.0, zoom_range=0.3,
-    horizontal_flip=False, validation_split=0.3, rescale=1./255)
+    horizontal_flip=False, validation_split=0.2, rescale=1./255)
 
 train_generator = data_gen.flow_from_directory(
     DATASET_PATH, 
@@ -35,7 +35,7 @@ val_generator = data_gen.flow_from_directory(
 
 # Build model
 print("[INFO] Compiling model...")
-alexnet = model(train_generator.num_classess, (TARGET_WIDTH, TARGET_HEIGHT, TARGET_DEPTH))
+alexnet = model(train_generator.num_classes, (TARGET_WIDTH, TARGET_HEIGHT, TARGET_DEPTH))
 
 # Compile the model
 alexnet.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
