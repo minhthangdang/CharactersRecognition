@@ -15,9 +15,7 @@ TARGET_DEPTH = 3
 
 # Set up the data generator to flow data from disk
 print("[INFO] Setting up Data Generator...")
-data_gen = ImageDataGenerator(rotation_range=10, width_shift_range=0.2,
-    height_shift_range=0.2, shear_range=30.0, zoom_range=0.3,
-    horizontal_flip=False, validation_split=0.2, rescale=1./255)
+data_gen = ImageDataGenerator(validation_split=0.2, rescale=1./255)
 
 train_generator = data_gen.flow_from_directory(
     DATASET_PATH, 
@@ -43,7 +41,7 @@ alexnet.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc
 # Train the network
 print("[INFO] Training network ...")
 # Set the learning rate decay
-reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2, patience=2, min_lr=0.001)
+reduce_lr = ReduceLROnPlateau(monitor='loss', factor=0.2, patience=2, min_lr=0.001)
 H = alexnet.fit_generator(
 	train_generator,
 	validation_data=val_generator,
@@ -53,6 +51,6 @@ H = alexnet.fit_generator(
 
 # save the model to disk
 print("[INFO] Serializing network...")
-alexnet.save(MODEL_PATH + os.path.sep + "my_model")
+alexnet.save(MODEL_PATH + os.path.sep + "trained_model")
 
 print("[INFO] Done!")

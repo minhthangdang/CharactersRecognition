@@ -1,8 +1,8 @@
 import argparse
-import cv2
-from keras.models import load_model
 import numpy as np
+from keras.models import load_model
 from keras.preprocessing.image import img_to_array
+import cv2
 
 # Construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
@@ -17,12 +17,12 @@ labels = [
 # Define constants
 TARGET_WIDTH = 128
 TARGET_HEIGHT = 128
-MODEL_PATH = './my_model'
+MODEL_PATH = './trained_model'
 
 # Load the image
-image = cv2.imread(args["image"])
+original_image = cv2.imread(args["image"])
 # Preprocessing the image
-image = cv2.resize(image, (TARGET_WIDTH, TARGET_HEIGHT))
+image = cv2.resize(original_image, (TARGET_WIDTH, TARGET_HEIGHT))
 image = image.astype("float") / 255.0
 image = img_to_array(image)
 image = np.expand_dims(image, axis=0)
@@ -35,4 +35,17 @@ model = load_model(MODEL_PATH, compile=False)
 print("[INFO] Classifying image...")
 prob = model.predict(image)[0]
 idx = np.argsort(prob)[-1]
-print(labels[idx])
+
+# Display original image
+cv2.imshow("Original Image", original_image)
+cv2.waitKey(0);
+
+# Display the predicted image
+cv2.putText(original_image, 'Character is ' + labels[idx], 
+    (10, 100), 
+    cv2.FONT_HERSHEY_SIMPLEX, 
+    2,
+    (255,0,255),
+    2)
+cv2.imshow("Recognised Image", original_image)
+cv2.waitKey(0)
