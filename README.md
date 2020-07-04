@@ -1,4 +1,4 @@
-# Characters Recognition using AlexNet
+# Characters Recognition using AlexNet Convolutional Neural Network
 
 ## Prerequisites
 
