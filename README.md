@@ -22,6 +22,13 @@ python train.py
 
 The model will be saved in the path specified by the constant MODEL_PATH. The model's file name is "trained_model".
 
+Model performance:
+
+```
+train accuracy: 97.29%
+validation accuracy: 95.46%
+```
+
 To test the trained model on an image, just run:
 
 ```python
