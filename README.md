@@ -12,7 +12,7 @@
 
 ## Usage
 
-Uncompress English.tar.gz into a folder and update the constant DATASET_PATH in train.py accordingly.
+Uncompress the file English.tar.gz into a folder and update the constant DATASET_PATH in train.py accordingly.
 
 To train the model:
 
