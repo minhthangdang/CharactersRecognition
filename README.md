@@ -8,6 +8,7 @@
 <li>Tensorflow 1.13.1</li>
 <li>OpenCV 4</li>
 <li>Numpy</li>
+</ul>
 
 ## Usage
 

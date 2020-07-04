@@ -7,6 +7,7 @@ from keras.layers.core import Dense
 from keras.layers import Conv2D, MaxPooling2D
 from keras import layers
 
+# Define the model using AlexNet architecture
 def model(num_classes, input_shape):
     model = Sequential()
 
